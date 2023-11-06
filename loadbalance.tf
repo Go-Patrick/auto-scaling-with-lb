@@ -21,9 +21,9 @@ resource "aws_lb" "demo_lb" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "attach" {
-  target_group_arn = aws_lb_target_group.demo_tg.arn
-  target_id = aws_autoscaling_group.test_ag.id
+resource "aws_autoscaling_attachment" "attach" {
+  autoscaling_group_name = aws_autoscaling_group.test_ag.name
+  lb_target_group_arn = aws_lb_target_group.demo_tg.arn
 }
 
 resource "aws_lb_listener" "demo-listen" {

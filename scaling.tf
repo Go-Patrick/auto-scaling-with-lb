@@ -1,7 +1,14 @@
+# resource "aws_key_pair" "test_key_pair" {
+#   key_name   = "test_my_key"
+#   public_key = file("~/.ssh/id_ed25519.pub")
+# }
+
 resource "aws_launch_template" "amazon_linux" {
   name_prefix          = "test-node"
   image_id             = data.aws_ami.amazon_linux.id
   instance_type        = "t2.micro"
+  key_name = "test_my_key"
+  security_group_names = [aws_security_group.demo_sg.id]
 
   network_interfaces {
     associate_public_ip_address = true
